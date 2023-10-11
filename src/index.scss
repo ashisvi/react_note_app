@@ -1,0 +1,358 @@
+$primary-color: #c4dfdf;
+$secondary-color: #d2e9e9;
+$third-color: #e3f4f4;
+$fourth-color: #f8f6f4;
+
+/* --------------------- mixins --------------------- */
+
+%main-mixin {
+  height: 100vh;
+  padding: 0.75rem;
+}
+
+%flex-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: $fourth-color;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: $primary-color;
+}
+
+.td-none {
+  text-decoration: none;
+  color: unset;
+}
+
+/* --------------------- main --------------------- */
+
+main {
+  flex-grow: 1;
+  height: 100vh;
+}
+
+/* --------------------- sidebar --------------------- */
+
+aside {
+  min-width: 300px;
+  max-height: 100vh;
+  padding: 1rem;
+  background-color: $secondary-color;
+  border-radius: 1rem;
+  margin: 0.5rem;
+
+  .aside_header {
+    @extend %flex-center;
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .navbar {
+    list-style: none;
+    margin-top: 1rem;
+
+    li {
+      margin-top: 0.5rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    li.active {
+      background-color: $primary-color;
+    }
+  }
+
+  svg {
+    margin-right: 0.5rem;
+  }
+
+  input {
+    border: 1px solid;
+    width: 100%;
+    padding: 9px 4px 9px 40px;
+    background: transparent
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+      no-repeat 13px center;
+    outline: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+/* --------------------- home --------------------- */
+
+.home {
+  height: 100vh;
+  padding: 0.75rem;
+  justify-content: flex-start;
+
+  .home_header {
+    @extend %flex-center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+.notes {
+  flex-grow: 1;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 88%;
+  border: 1px solid $primary-color;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+
+.addNote {
+  border-radius: 0.5rem;
+  background-color: $secondary-color;
+  display: grid;
+  place-content: center;
+}
+
+.note {
+  border-radius: 0.5rem;
+
+  .note_footer {
+    @extend %flex-center;
+
+    svg {
+      height: 1.3rem;
+      width: 1.3rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.listView {
+  @extend %flex-column;
+  flex-wrap: nowrap;
+
+  .addNote {
+    width: 100%;
+    padding: 0.5rem;
+    height: 60px;
+
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  .td-none {
+    width: 100%;
+  }
+
+  .note {
+    width: 100%;
+    padding: 1rem;
+    height: 70px;
+    @extend %flex-center;
+
+    .note_footer {
+      width: 50%;
+    }
+  }
+}
+
+.gridView {
+  .addNote {
+    height: 280px;
+    width: 280px;
+    padding: 1rem;
+
+    svg {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  .note {
+    display: flex;
+    @extend %flex-column;
+    height: 280px;
+    width: 280px;
+    padding: 1rem;
+
+    h3 {
+      margin-bottom: 0.25rem;
+    }
+
+    .note_body {
+      flex-grow: 1;
+      margin: 0.25rem 1rem;
+      overflow: hidden;
+    }
+
+    .note_footer {
+      margin-top: 1rem;
+      padding: 0.2rem;
+
+      svg {
+        opacity: 0;
+      }
+    }
+
+    &:hover .note_footer svg {
+      opacity: 1;
+    }
+  }
+}
+
+/* --------------------- New note --------------------- */
+
+.newNote {
+  @extend %main-mixin;
+  padding: 1rem;
+
+  form {
+    margin-top: 1rem;
+    padding: 0.25rem;
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      outline: none;
+      padding: 0.5rem;
+      background-color: transparent;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 2px solid $primary-color;
+      border-radius: 0.25rem;
+    }
+
+    textarea {
+      resize: none;
+      height: 200px;
+    }
+
+    .btn {
+      max-width: fit-content;
+      margin: auto;
+      padding: 0.5rem 1rem;
+      margin-top: 1.5rem;
+      background-color: $secondary-color;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+}
+
+/* --------------------- Note page --------------------- */
+
+.notePage {
+  @extend %main-mixin;
+  @extend %flex-column;
+
+  .notePage_heading {
+    margin: 0.5rem auto;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    svg {
+      margin: auto 1rem;
+      cursor: pointer;
+    }
+  }
+
+  .notePage_body {
+    padding: 2rem;
+    border: 1px solid $primary-color;
+    border-radius: 0.25rem;
+    flex-grow: 1;
+  }
+}
+
+/* --------------------- Misssing --------------------- */
+
+.missing {
+  border: 2px solid $primary-color;
+  display: grid;
+  place-content: center;
+  height: 96%;
+  text-align: center;
+  margin: 1rem;
+  border-radius: 0.25rem;
+
+  h1 {
+    font-size: 15rem;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    margin: 1rem auto;
+    text-decoration: none;
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}
